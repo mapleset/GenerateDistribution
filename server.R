@@ -1,17 +1,16 @@
-library(shiny)
-require(ggplot2)
+# Generate Distribution App
+# derived and improved from sample code
+# for the Coursera Data Products class
+# 11/22/2015
+# mapleset
 
-# Define server logic for random distribution application
+library(shiny)
+
+# Define server logic for application
 shinyServer(function(input, output) {
   
-  # Reactive expression to generate the requested distribution.
-  # This is called whenever the inputs change. The output
-  # functions defined below then all use the value computed from
-  # this expression
+  # Reactive expression to generate the distribution
   distData <- reactive({
-    #dist <- switch(input$dist, norm = rnorm, unif = runif, lnorm = rlnorm, exp = rexp, rnorm)
-    #dist(input$n, mean=100, sd=0.2)
-    
     dist <- switch(input$dist,
                    norm = rnorm(input$n, mean=input$mean, sd=input$sd),
                    unif = runif(input$n),
@@ -21,11 +20,7 @@ shinyServer(function(input, output) {
     
   })
 
-  # Generate a plot of the data. Also uses the inputs to build
-  # the plot label. Note that the dependencies on both the inputs
-  # and the data reactive expression are both tracked, and
-  # all expressions are called in the sequence implied by the
-  # dependency graph
+  # Generate a plot of the data
   output$plot <- renderPlot({
     distTypeLabel <- paste('r', input$dist, '(', input$n, ', mean=', input$mean, ', sd=', input$sd, ')', sep='')
     
