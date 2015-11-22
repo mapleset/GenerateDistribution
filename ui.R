@@ -56,11 +56,13 @@ sidebarLayout(
   #
   mainPanel(
     tabsetPanel(type = "tabs", 
-                tabPanel("Plot", plotOutput("plot")),
+                tabPanel("Histogram", plotOutput("plot")),
                 tabPanel("Box Plot", plotOutput("boxPlot")), 
                 tabPanel("Summary", verbatimTextOutput("summary")), 
                 tabPanel("Table", tableOutput("table")),
     
+    h5('Select the tab(s) above to switch the view between Histogram, Box Plot, Summary, and Table.'),
+    br(),
     h5('The rnorm() function generates n random numbers whose distribution is normal.'),
     h5('The runif() function is used to simulate n independent uniform random variables.')
     )
